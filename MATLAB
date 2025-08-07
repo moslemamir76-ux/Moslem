@@ -1,0 +1,13 @@
+f=@(b,x) b(1).*(x(:,1).^b(2)).*(x(:,2).^b(3)).*(x(:,3).^b(4));
+mdl=fitnlm(x,y,f,ones(1,4));
+b=mdl.Coefficients;
+b=table2array(b);
+b=b(:,1);
+JM=b(1).*(2.^b(2)).*(10000.^b(3)).*(1e-5.^b(4))
+
+x1=linspace(0,30,15);
+plot(x1,x1,'k--',(y(:,1)),(JM),'o','LineWidth',1.5)
+xlabel('\DeltaP/P_{Ref}: Actual','FontSize',12,'FontWeight','bold','Color','k')
+ylabel ('\DeltaP/P_{Ref}: Predicted','FontSize',12,'FontWeight','bold','Color','k')
+legend ({'y=x'},'FontSize',14,'FontWeight','bold')
+title(legend,'R^2=0.98'), legend('boxoff')
